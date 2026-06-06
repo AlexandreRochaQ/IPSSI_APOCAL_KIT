@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { generateQuiz } from '@/api/llm';
-import { AxiosError } from 'axios';
+import { getApiErrorMessage } from '@/api/errors';
 
 export default function UploadPage() {
   const navigate = useNavigate();
@@ -24,11 +24,7 @@ export default function UploadPage() {
       });
       navigate(`/quiz/${quiz.id}`);
     } catch (err) {
-      if (err instanceof AxiosError) {
-        setError(err.response?.data?.detail ?? 'Échec de la génération.');
-      } else {
-        setError('Erreur réseau.');
-      }
+      setError(getApiErrorMessage(err, 'Échec de la génération.'));
     } finally {
       setLoading(false);
     }
@@ -117,7 +113,7 @@ export default function UploadPage() {
         <button type="submit" disabled={loading} className="btn-primary w-full">
           {loading ? (
             <>
-              <span className="animate-spin">⏳</span> Génération en cours… (peut prendre 30s à 2min)
+              <span className="animate-spin">⏳</span> Génération en cours… (1 à 5 min sur CPU, patientez)
             </>
           ) : (
             <>🚀 Générer le quiz</>
@@ -125,7 +121,8 @@ export default function UploadPage() {
         </button>
 
         <p className="text-xs text-slate-500 text-center">
-          La génération peut prendre 30 secondes à 2 minutes selon votre machine.
+          La génération peut prendre de 1 à 5 minutes selon votre machine
+          (bien plus rapide avec un GPU ou un modèle plus léger).
         </p>
       </form>
     </div>

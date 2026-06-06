@@ -30,6 +30,9 @@ export async function generateQuiz(input: {
 
   const { data } = await api.post<Quiz>('/llm/generate-quiz/', form, {
     headers: { 'Content-Type': 'multipart/form-data' },
+    // La génération LLM sur CPU peut prendre plusieurs minutes : on dépasse
+    // largement le timeout axios par défaut (120 s). Aligné sur OLLAMA_TIMEOUT.
+    timeout: 600_000,
   });
   return data;
 }
