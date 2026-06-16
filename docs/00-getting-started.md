@@ -64,7 +64,7 @@ make seed
 ```
 
 Vous aurez accès à :
-- Username : `test`
+- Email : `test@apocal.local` _(la connexion se fait par email, pas par nom d'utilisateur)_
 - Password : `motdepasse123`
 - 2 quizz d'exemple déjà dans l'historique
 
@@ -90,7 +90,7 @@ docker compose exec backend python manage.py createsuperuser
 
 ## 🎯 Premier quiz généré
 
-1. Connectez-vous sur http://localhost:3000/login (`test` / `motdepasse123`)
+1. Connectez-vous sur http://localhost:3000/login (`test@apocal.local` / `motdepasse123`)
 2. Cliquez sur **Nouveau quiz**
 3. Collez un paragraphe (≥ 200 caractères) — par exemple un extrait Wikipédia
 4. Donnez un titre, cliquez **Générer**
