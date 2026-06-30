@@ -194,13 +194,13 @@ def main():
     print(f"p50 (médiane)           : {percentile(latences, 50):.2f}s")
     print(f"p95                     : {percentile(latences, 95):.2f}s")
 
-    # Petit garde-fou par rapport à l'objectif produit (< 60s)
+    # Petit garde-fou par rapport à l'objectif produit (< 45s)
     p95 = percentile(latences, 95)
-    if p95 > 60:
-        print(f"\n⚠️  p95 ({p95:.2f}s) dépasse l'objectif produit de 60s.")
+    if p95 > 45:
+        print(f"\n⚠️  p95 ({p95:.2f}s) dépasse l'objectif produit de 45s.")
         print("   → matière à documenter dans l'ADR (changement de modèle, optimisation du prompt, cache, etc.)")
     else:
-        print(f"\n✅ p95 ({p95:.2f}s) respecte l'objectif produit de 60s.")
+        print(f"\n✅ p95 ({p95:.2f}s) respecte l'objectif produit de 45s.")
 
 
 if __name__ == "__main__":
